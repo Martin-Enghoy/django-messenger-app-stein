@@ -5,7 +5,9 @@ from django.db import models
 from django.utils import timezone
 
 
+
 class CustomUserManager(UserManager):
+    # Replace the default user.object, extends the UserManager
     def _create_user(self, name, email, password, **extra_fields):
         if not email:
             raise ValueError("You have not provided a valid e-mail address")
@@ -29,6 +31,7 @@ class CustomUserManager(UserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
+    # Creating Custom Roles assigned on the Database apparently
     AGENT = 'agent'
     MANAGER = 'manager'
 
